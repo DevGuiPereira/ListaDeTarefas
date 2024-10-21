@@ -1,5 +1,6 @@
 import React from "react";
 import { TextInput, View, Text } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { style } from "./style"; // Adjust the import path as necessary
 
 interface DateInputComponentProps {

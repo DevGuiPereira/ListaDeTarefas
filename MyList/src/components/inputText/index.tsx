@@ -1,5 +1,6 @@
 import React from "react";
 import { TextInput, TouchableOpacity, Text, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { style } from "./style";
 
 interface InputComponentProps {

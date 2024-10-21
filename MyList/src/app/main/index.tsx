@@ -5,6 +5,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { themas } from "../../global/themas";
 import CreateTaskModal from "../modal";
 import Button from "../../components/button";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Main = () => {
   // Estado para controlar a visibilidade do modal

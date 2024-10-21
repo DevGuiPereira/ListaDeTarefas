@@ -1,6 +1,7 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import { style } from "./style";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface ButtonProps {
   title: string;
