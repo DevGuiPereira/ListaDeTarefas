@@ -27,7 +27,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 }) => {
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
-  const [taskDate, setTaskDate] = useState("");
+  const [taskDateFinish, setTaskDateFinish] = useState("");
 
   const saveTask = async () => {
     if (!taskName) {
@@ -39,11 +39,19 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
       const lastId = await AsyncStorage.getItem("@task_last_id");
       const newId = lastId ? parseInt(lastId) + 1 : 1;
 
+      // Captura a data de criação e formata para MM-DD-YYYY
+      const date = new Date();
+      const formattedDate = `${String(date.getMonth() + 1).padStart(
+        2,
+        "0"
+      )}-${String(date.getDate()).padStart(2, "0")}-${date.getFullYear()}`;
+
       const task = {
         id: newId,
         name: taskName,
-        description: taskDescription || "", // String vazia se não preenchido
-        date: taskDate || "", // String vazia se não preenchido
+        description: taskDescription || "",
+        dateFinish: taskDateFinish || "",
+        dateCreated: formattedDate,
       };
 
       await AsyncStorage.setItem(`@task_${newId}`, JSON.stringify(task));
@@ -52,17 +60,17 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
       // Limpa os campos
       setTaskName("");
       setTaskDescription("");
-      setTaskDate("");
+      setTaskDateFinish("");
 
       // Constrói a mensagem do alerta dinamicamente
-      let alertMessage = `Here are the details of the saved task:\n\nName: ${task.name}`;
+      let alertMessage = `Here are the details of the saved task:\n\nName: ${task.name}\nCreated At: ${task.dateCreated}`;
 
       if (task.description) {
         alertMessage += `\nDescription: ${task.description}`;
       }
 
-      if (task.date) {
-        alertMessage += `\nDate: ${task.date}`;
+      if (task.dateFinish) {
+        alertMessage += `\nDate: ${task.dateFinish}`;
       }
 
       Alert.alert("Task Saved", alertMessage);
@@ -102,9 +110,9 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
             />
 
             <DateInputComponent
-              value={taskDate}
-              placeholder="Date:YYYY-MM-DD"
-              onChangeText={(text) => setTaskDate(text)}
+              value={taskDateFinish}
+              placeholder="Date:MM-DD-YYYY"
+              onChangeText={(text) => setTaskDateFinish(text)}
             />
 
             <Button title="Save Task" onPress={saveTask} />

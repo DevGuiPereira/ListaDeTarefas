@@ -16,9 +16,9 @@ const formatDate = (text: string) => {
   const len = digits.length;
 
   // Adiciona os hifens na posição correta
-  if (len < 5) return digits; // Para entradas menores que 5, retorne somente os dígitos
-  if (len < 8) return `${digits.slice(0, 4)}-${digits.slice(4)}`; // yyyy-mm
-  return `${digits.slice(0, 4)}-${digits.slice(4, 6)}-${digits.slice(6, 8)}`; // yyyy-mm-dd
+  if (len < 3) return digits; // Para entradas menores que 3, retorne somente os dígitos
+  if (len < 5) return `${digits.slice(0, 2)}-${digits.slice(2)}`; // mm-dd
+  return `${digits.slice(0, 2)}-${digits.slice(2, 4)}-${digits.slice(4, 8)}`; // mm-dd-yyyy
 };
 
 const DateInputComponent: React.FC<DateInputComponentProps> = ({
