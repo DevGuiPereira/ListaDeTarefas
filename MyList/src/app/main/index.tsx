@@ -6,9 +6,10 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import { style } from "./style";
+import { style } from "./style"; // Assuming your styles are in a separate file
 import CreateTaskModal from "../modalCreateTask";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { themas } from "../../global/themas";
 
 const Main = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -45,16 +46,67 @@ const Main = () => {
   // Função para renderizar cada tarefa na lista
   const renderTask = ({ item }: { item: any }) => (
     <TouchableOpacity style={style.taskContainer}>
-      <Text style={style.taskTitle}>{item.name}</Text>
-      <Text style={style.taskDate}>Created At: {item.dateCreated}</Text>
-      {item.description ? (
-        <Text style={style.taskDescription}>{item.description}</Text>
-      ) : null}
-      {item.dateFinish ? (
-        <Text style={style.taskDate}>Due: {item.dateFinish}</Text>
-      ) : null}
+      <TouchableOpacity
+        style={[
+          style.circleButton,
+          { backgroundColor: item.completed ? "green" : "red" }, // Change color based on completion status
+        ]}
+        onPress={() => toggleTaskCompletion(item.id)} // Function to toggle completion
+      />
+      <View style={style.taskDetails}>
+        <Text
+          style={[
+            style.taskTitle,
+            item.completed
+              ? { textDecorationLine: "line-through", color: "#999" }
+              : {}, // Apply strikethrough if completed
+          ]}
+        >
+          {item.name}
+        </Text>
+        <Text
+          style={[
+            style.taskDate,
+            item.completed
+              ? { textDecorationLine: "line-through", color: "#999" }
+              : {},
+          ]}
+        >
+          Created At: {item.dateCreated}
+        </Text>
+        {item.description && !item.completed ? (
+          <Text style={style.taskDescription}>{item.description}</Text>
+        ) : null}
+        {item.dateFinish && !item.completed ? (
+          <Text style={style.taskDate}>Due: {item.dateFinish}</Text>
+        ) : null}
+      </View>
     </TouchableOpacity>
   );
+
+  // Function to toggle task completion
+  const toggleTaskCompletion = async (id: number | string) => {
+    try {
+      const updatedTasks = tasks.map((task) => {
+        if (task.id === id) {
+          task.completed = !task.completed; // Toggle the completed status
+        }
+        return task;
+      });
+      setTasks(updatedTasks);
+
+      // Save updated tasks back to AsyncStorage
+      await AsyncStorage.setItem(
+        "@task_last_id",
+        JSON.stringify(updatedTasks.length)
+      );
+      updatedTasks.forEach(async (task, index) => {
+        await AsyncStorage.setItem(`@task_${index + 1}`, JSON.stringify(task));
+      });
+    } catch (error) {
+      console.error("Error updating task completion:", error);
+    }
+  };
 
   return (
     <View style={style.container}>

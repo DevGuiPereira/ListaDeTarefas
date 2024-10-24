@@ -52,6 +52,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
         description: taskDescription || "",
         dateFinish: taskDateFinish || "",
         dateCreated: formattedDate,
+        completed: false,
       };
 
       await AsyncStorage.setItem(`@task_${newId}`, JSON.stringify(task));

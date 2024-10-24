@@ -61,6 +61,8 @@ export const style = StyleSheet.create({
     fontSize: 14,
   },
   taskContainer: {
+    flexDirection: "row", // Align items horizontally
+    alignItems: "center", // Center vertically
     backgroundColor: "#f0f0f0",
     padding: 15,
     marginVertical: 5,
@@ -87,5 +89,14 @@ export const style = StyleSheet.create({
     fontSize: 16,
     color: "#999",
     marginTop: 20,
+  },
+  circleButton: {
+    width: 30, // Diameter of the circle
+    height: 30,
+    borderRadius: 15, // Makes it a circle
+    marginRight: 10, // Space between circle and title
+  },
+  taskDetails: {
+    flex: 1, // Allows task details to take up remaining space
   },
 });
