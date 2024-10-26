@@ -10,11 +10,11 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import { style } from "./style";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import InputText from "../../components/inputText";
 import DateInputComponent from "../../components/inputDate";
 import Button from "../../components/button";
-import { style } from "./style";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface CreateTaskModalProps {
   visible: boolean;
@@ -29,6 +29,18 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
   const [taskDescription, setTaskDescription] = useState("");
   const [taskDateFinish, setTaskDateFinish] = useState("");
 
+  const loadExistingTasks = async () => {
+    const keys = await AsyncStorage.getAllKeys();
+    const taskKeys = keys.filter((key) => key.startsWith("@task_"));
+    const loadedTasks = await Promise.all(
+      taskKeys.map(async (key) => {
+        const taskString = await AsyncStorage.getItem(key);
+        return taskString ? JSON.parse(taskString) : null;
+      })
+    );
+    return loadedTasks.filter((task) => task !== null);
+  };
+
   const saveTask = async () => {
     if (!taskName) {
       Alert.alert("Validation", "Task name is required.");
@@ -36,10 +48,13 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
     }
 
     try {
-      const lastId = await AsyncStorage.getItem("@task_last_id");
-      const newId = lastId ? parseInt(lastId) + 1 : 1;
+      const existingTasks = await loadExistingTasks();
 
-      // Captura a data de criação e formata para MM-DD-YYYY
+      let newId: number; // Explicitly declare the type of newId
+      do {
+        newId = Math.floor(Math.random() * 10000); // Change range as needed
+      } while (existingTasks.some((task: any) => task.id === newId));
+
       const date = new Date();
       const formattedDate = `${String(date.getMonth() + 1).padStart(
         2,
@@ -56,29 +71,14 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
       };
 
       await AsyncStorage.setItem(`@task_${newId}`, JSON.stringify(task));
-      await AsyncStorage.setItem("@task_last_id", newId.toString());
 
-      // Limpa os campos
+      // Clear input fields
       setTaskName("");
       setTaskDescription("");
       setTaskDateFinish("");
 
-      // Constrói a mensagem do alerta dinamicamente
-      let alertMessage = `Here are the details of the saved task:\n\nName: ${task.name}\nCreated At: ${task.dateCreated}`;
-
-      if (task.description) {
-        alertMessage += `\nDescription: ${task.description}`;
-      }
-
-      if (task.dateFinish) {
-        alertMessage += `\nDate: ${task.dateFinish}`;
-      }
-
-      Alert.alert("Task Saved", alertMessage);
-
       onClose();
     } catch (error) {
-      console.error("Error saving task:", error);
       Alert.alert("Error", "There was an issue saving the task.");
     }
   };
@@ -112,7 +112,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 
             <DateInputComponent
               value={taskDateFinish}
-              placeholder="Date:MM-DD-YYYY"
+              placeholder="Date: MM-DD-YYYY"
               onChangeText={(text) => setTaskDateFinish(text)}
             />
 

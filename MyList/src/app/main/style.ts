@@ -1,4 +1,3 @@
-// style.ts
 import { StyleSheet } from "react-native";
 
 export const style = StyleSheet.create({
@@ -10,42 +9,34 @@ export const style = StyleSheet.create({
   taskContainer: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 15, // Padding for the task container
-    marginBottom: 15, // Space between tasks
+    padding: 15,
+    marginBottom: 15,
     backgroundColor: "#fff",
-    borderRadius: 10, // Rounded corners for a smoother look
+    borderRadius: 10,
   },
   circleButton: {
-    width: 30, // Increased size for better visibility
+    width: 30,
     height: 30,
     borderRadius: 15,
     marginRight: 15,
-    // Removed border to eliminate the blue outline
-    // borderWidth: 2, // Removed for flat design
-    // borderColor: "#007BFF", // Removed for flat design
-    backgroundColor: "transparent", // Ensure the button is transparent or set your desired color
+    backgroundColor: "transparent",
   },
   taskDetails: {
     flex: 1,
   },
   taskTitle: {
-    fontSize: 18, // Increased font size
+    fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 5, // Space between title and date
+    marginBottom: 5,
   },
   taskDate: {
     fontSize: 14,
     color: "#666",
-    marginBottom: 5, // Space between date and description
+    marginBottom: 5,
   },
   taskDescription: {
-    fontSize: 14, // Increased font size for better readability
+    fontSize: 14,
     color: "#333",
-  },
-  editButton: {
-    color: "#007BFF",
-    marginTop: 5,
-    fontSize: 14, // Increased font size for better visibility
   },
   absoluteButtonContainer: {
     position: "absolute",
@@ -54,20 +45,8 @@ export const style = StyleSheet.create({
     right: 20,
     alignItems: "center",
   },
-  button: {
-    backgroundColor: "#007BFF",
-    padding: 15,
-    borderRadius: 5,
-    width: "100%",
-    marginBottom: 10,
-  },
-  buttonText: {
-    color: "white",
-    textAlign: "center",
-    fontSize: 16,
-  },
   taskList: {
-    paddingBottom: 100, // To avoid content being obscured by the button
+    paddingBottom: 100,
   },
   emptyText: {
     textAlign: "center",

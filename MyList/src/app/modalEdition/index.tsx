@@ -1,10 +1,18 @@
 // EditTaskModal.tsx
 import React, { useEffect, useState } from "react";
-import { Modal, View, Text, TouchableOpacity } from "react-native";
+import {
+  Modal,
+  View,
+  Text,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import InputComponent from "../../components/inputText"; // Adjust the import path as necessary
 import DateInputComponent from "../../components/inputDate"; // Adjust the import path as necessary
 import Button from "../../components/button"; // Your button component
-import  style  from "./style"; // Adjust the import path as necessary
+import style from "./style"; // Adjust the import path as necessary
 
 interface EditTaskModalProps {
   visible: boolean;
@@ -57,41 +65,43 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
       visible={visible}
       onRequestClose={onClose}
     >
-      <View style={style.modalBackground}>
-        <View style={style.modalContainer}>
-          <Text style={style.modalTitle}>Edit Task</Text>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={style.modalBackground}>
+          <View style={style.modalContainer}>
+            <Text style={style.modalTitle}>Edit Task</Text>
 
-          <InputComponent
-            value={name}
-            placeholder="Task Name"
-            onChangeText={setName}
-          />
-          <InputComponent
-            value={description}
-            placeholder="Task Description"
-            onChangeText={setDescription}
-          />
-          <DateInputComponent
-            value={dateFinish}
-            placeholder="Due Date (MM-DD-YYYY)"
-            onChangeText={setDateFinish}
-          />
-
-          <View style={style.buttonContainer}>
-            <Button title="Save" onPress={handleSave} />
-            <Button
-              title="Delete Task"
-              onPress={() => {
-                if (task) {
-                  onDelete(task.id);
-                  onClose();
-                }
-              }}
+            <InputComponent
+              value={name}
+              placeholder="Task Name"
+              onChangeText={setName}
             />
-            <Button title="Cancel" onPress={onClose} />
+            <InputComponent
+              value={description}
+              placeholder="Task Description"
+              onChangeText={setDescription}
+            />
+            <DateInputComponent
+              value={dateFinish}
+              placeholder="Due Date (MM-DD-YYYY)"
+              onChangeText={setDateFinish}
+            />
+
+            <View style={style.buttonContainer}>
+              <Button title="Save" onPress={handleSave} />
+              <Button
+                title="Delete Task"
+                onPress={() => {
+                  if (task) {
+                    onDelete(task.id);
+                    onClose();
+                  }
+                }}
+              />
+              <Button title="Cancel" onPress={onClose} />
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     </Modal>
   );
 };
