@@ -13,19 +13,7 @@ import InputComponent from "../../components/inputText"; // Adjust the import pa
 import DateInputComponent from "../../components/inputDate"; // Adjust the import path as necessary
 import Button from "../../components/button"; // Your button component
 import style from "./style"; // Adjust the import path as necessary
-
-interface EditTaskModalProps {
-  visible: boolean;
-  onClose: () => void;
-  task: {
-    id: number | string;
-    name: string;
-    description?: string;
-    dateFinish?: string;
-  } | null;
-  onEdit: (task: any) => void;
-  onDelete: (id: number | string) => void;
-}
+import { EditTaskModalProps } from "./types";
 
 const EditTaskModal: React.FC<EditTaskModalProps> = ({
   visible,

@@ -3,21 +3,7 @@ import React from "react";
 import { View, Text, Modal } from "react-native";
 import Button from "../../components/button"; // Import the Button component
 import { style } from "./style"; // Import your styles here
-
-interface TaskDetailModalProps {
-  visible: boolean;
-  onClose: () => void;
-  task: {
-    id: number | string;
-    name: string;
-    description?: string;
-    dateCreated: string;
-    dateFinish?: string;
-    completed: boolean;
-  } | null;
-  onDelete: (id: number | string) => void; // Callback for deleting the task
-  onEdit: (task: any) => void; // Callback for editing the task
-}
+import { TaskDetailModalProps } from "./types";
 
 const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
   visible,

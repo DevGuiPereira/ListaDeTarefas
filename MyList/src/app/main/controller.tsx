@@ -21,7 +21,7 @@ export function useControllerMain() {
       taskKeys.map(async (key) => {
         const taskString = await AsyncStorage.getItem(key);
         return taskString ? JSON.parse(taskString) : null;
-      })
+        })
     );
     setTasks(loadedTasks.filter((task) => task !== null));
   };
@@ -73,7 +73,7 @@ export function useControllerMain() {
         task.id === id ? { ...task, completed: !task.completed } : task
       );
       setTasks(updatedTasks);
-      await Promise.all(
+            await Promise.all(
         updatedTasks.map((task) =>
           AsyncStorage.setItem(`@task_${task.id}`, JSON.stringify(task))
         )
@@ -83,19 +83,18 @@ export function useControllerMain() {
     }
   };
 
-  const deleteTask = async (id: string | number) => {
-    try {
-      const updatedTasks = tasks.filter((task) => task.id !== id);
-      setTasks(updatedTasks);
-      await Promise.all(
-        updatedTasks.map((task) =>
-          AsyncStorage.setItem(`@task_${task.id}`, JSON.stringify(task))
-        )
-      );
-    } catch (error) {
-      console.error("Error deleting task:", error);
-    }
-  };
+const deleteTask = async (id: string | number) => {
+  try {
+    // Remove the task from AsyncStorage
+    await AsyncStorage.removeItem(`@task_${id}`);
+
+    // Update the state to remove the task
+    const updatedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTasks);
+  } catch (error) {
+    console.error("Error deleting task:", error);
+  }
+};
 
   const editTask = async (updatedTask: any) => {
     try {
@@ -103,7 +102,7 @@ export function useControllerMain() {
         task.id === updatedTask.id ? { ...task, ...updatedTask } : task
       );
       setTasks(updatedTasks);
-      await Promise.all(
+            await Promise.all(
         updatedTasks.map((task) =>
           AsyncStorage.setItem(`@task_${task.id}`, JSON.stringify(task))
         )
