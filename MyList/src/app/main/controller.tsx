@@ -14,17 +14,26 @@ export function useControllerMain() {
   const [tasks, setTasks] = useState<any[]>([]);
   const [currentTask, setCurrentTask] = useState<any | null>(null);
 
-  const loadTasks = async () => {
-    const keys = await AsyncStorage.getAllKeys();
-    const taskKeys = keys.filter((key) => key.startsWith("@task_"));
-    const loadedTasks = await Promise.all(
-      taskKeys.map(async (key) => {
-        const taskString = await AsyncStorage.getItem(key);
-        return taskString ? JSON.parse(taskString) : null;
+    const loadTasks = async () => {
+      const keys = await AsyncStorage.getAllKeys();
+      const taskKeys = keys.filter((key) => key.startsWith("@task_"));
+      const loadedTasks = await Promise.all(
+        taskKeys.map(async (key) => {
+          const taskString = await AsyncStorage.getItem(key);
+          return taskString ? JSON.parse(taskString) : null;
         })
-    );
-    setTasks(loadedTasks.filter((task) => task !== null));
-  };
+      );
+      const filteredTasks = loadedTasks.filter((task) => task !== null);
+
+      // Ordenar as tarefas pela data de criação
+      const sortedTasks = filteredTasks.sort((b, a) => {
+        return (
+          new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime()
+        );
+      });
+
+      setTasks(sortedTasks);
+    };
 
   useEffect(() => {
     loadTasks();

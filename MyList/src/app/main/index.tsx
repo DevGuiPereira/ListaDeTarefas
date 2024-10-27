@@ -11,6 +11,7 @@ import { useControllerMain } from "./controller";
 const Main = () => {
  const controller = useControllerMain()
 
+
   return (
     <View style={style.container}>
       <FlatList

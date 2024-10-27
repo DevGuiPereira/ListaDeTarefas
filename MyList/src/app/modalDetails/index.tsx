@@ -25,7 +25,12 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
           {task?.description && (
             <Text style={style.taskDescription}>{task.description}</Text>
           )}
-          <Text style={style.taskDate}>Created At: {task?.dateCreated}</Text>
+          <Text style={style.taskDate}>
+            Created At:{" "}
+            {task?.dateCreated
+              ? new Date(task.dateCreated).toLocaleDateString("en-us")
+              : ""}
+          </Text>
           {task?.dateFinish && (
             <Text style={style.taskDate}>Due: {task.dateFinish}</Text>
           )}

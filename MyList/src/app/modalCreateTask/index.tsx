@@ -54,7 +54,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 
             <DateInputComponent
               value={controller.taskDateFinish}
-              placeholder="Date: MM-DD-YYYY"
+              placeholder="Date: MM/DD/YYYY"
               onChangeText={(text) => controller.setTaskDateFinish(text)}
             />
 

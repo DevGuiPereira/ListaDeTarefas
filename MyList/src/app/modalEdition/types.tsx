@@ -27,3 +27,9 @@ export interface EditTaskModalProps {
   onEdit: (task: any) => void;
   onDelete: (id: number | string) => void;
 }
+export interface Task {
+  id: number | string;
+  name: string;
+  description?: string;
+  dateFinish?: string;
+}

@@ -1,20 +1,12 @@
-/*import React, { useEffect, useState } from "react";
-import {
-  Modal,
-  View,
-  Text,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from "react-native";
-import InputComponent from "../../components/inputText"; // Adjust the import path as necessary
-import DateInputComponent from "../../components/inputDate"; // Adjust the import path as necessary
-import Button from "../../components/button"; // Your button component
-import style from "./style"; // Adjust the import path as necessary
+import { useState, useEffect } from "react";
 import { EditTaskModalProps, Task } from "./types";
 
-export function useControllerEdition() {
+export const useEditTaskController = (
+  task: Task | null,
+  onEdit: (updatedTask: Task) => void,
+  onDelete: (taskId: string | number) => void,
+  onClose: () => void
+) => {
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [dateFinish, setDateFinish] = useState<string>("");
@@ -38,5 +30,22 @@ export function useControllerEdition() {
       onClose();
     }
   };
-  return {};
-}*/
+
+  const handleDelete = () => {
+    if (task) {
+      onDelete(task.id);
+      onClose();
+    }
+  };
+
+  return {
+    name,
+    setName,
+    description,
+    setDescription,
+    dateFinish,
+    setDateFinish,
+    handleSave,
+    handleDelete,
+  };
+};

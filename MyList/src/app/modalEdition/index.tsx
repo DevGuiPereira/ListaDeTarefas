@@ -14,6 +14,7 @@ import DateInputComponent from "../../components/inputDate"; // Adjust the impor
 import Button from "../../components/button"; // Your button component
 import style from "./style"; // Adjust the import path as necessary
 import { EditTaskModalProps } from "./types";
+import { useEditTaskController } from "./controller";
 
 const EditTaskModal: React.FC<EditTaskModalProps> = ({
   visible,
@@ -22,29 +23,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
   onEdit,
   onDelete,
 }) => {
-  const [name, setName] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [dateFinish, setDateFinish] = useState<string>("");
 
-  useEffect(() => {
-    if (task) {
-      setName(task.name);
-      setDescription(task.description || "");
-      setDateFinish(task.dateFinish || "");
-    }
-  }, [task]);
-
-  const handleSave = () => {
-    if (task) {
-      onEdit({
-        id: task.id,
-        name,
-        description,
-        dateFinish,
-      });
-      onClose();
-    }
-  };
+    const controller = useEditTaskController(task, onEdit, onDelete, onClose);
 
   return (
     <Modal
@@ -59,23 +39,23 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
             <Text style={style.modalTitle}>Edit Task</Text>
 
             <InputComponent
-              value={name}
+              value={controller.name}
               placeholder="Task Name"
-              onChangeText={setName}
+              onChangeText={controller.setName}
             />
             <InputComponent
-              value={description}
+              value={controller.description}
               placeholder="Task Description"
-              onChangeText={setDescription}
+              onChangeText={controller.setDescription}
             />
             <DateInputComponent
-              value={dateFinish}
+              value={controller.dateFinish}
               placeholder="Due Date (MM-DD-YYYY)"
-              onChangeText={setDateFinish}
+              onChangeText={controller.setDateFinish}
             />
 
             <View style={style.buttonContainer}>
-              <Button title="Save" onPress={handleSave} />
+              <Button title="Save" onPress={controller.handleSave} />
               <Button
                 title="Delete Task"
                 onPress={() => {
