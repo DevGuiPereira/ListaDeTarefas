@@ -23,8 +23,13 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
   onEdit,
   onDelete,
 }) => {
-
-    const controller = useEditTaskController(task, onEdit, onDelete, onClose);
+  const controller = useEditTaskController({
+    task,
+    onEdit,
+    onDelete,
+    onClose,
+    visible,
+  });
 
   return (
     <Modal

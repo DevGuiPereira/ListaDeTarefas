@@ -9,8 +9,7 @@ import TaskDetailModal from "../modalDetails";
 import { useControllerMain } from "./controller";
 
 const Main = () => {
- const controller = useControllerMain()
-
+  const controller = useControllerMain();
 
   return (
     <View style={style.container}>
@@ -26,29 +25,32 @@ const Main = () => {
           title="Create Task"
           onPress={() => controller.setModalVisible(true)}
         />
-        <Button title="Delete All Tasks" onPress={controller.deleteAllTasks} />
       </View>
       <CreateTaskModal
         visible={controller.modalVisible}
-        onClose={() => controller.setModalVisible(false)}
+        onClose={() => controller.onCloseModal()}
       />
-      <EditTaskModal
-        visible={controller.editModalVisible}
-        onClose={() => controller.setEditModalVisible(false)}
-        task={controller.currentTask}
-        onEdit={controller.editTask}
-        onDelete={controller.deleteTask}
-      />
-      <TaskDetailModal
-        visible={controller.detailModalVisible}
-        onClose={() => controller.setDetailModalVisible(false)}
-        task={controller.currentTask}
-        onDelete={controller.deleteTask}
-        onEdit={(task) => {
-          controller.setCurrentTask(task);
-          controller.setEditModalVisible(true);
-        }}
-      />
+      {controller.currentTask && (
+        <EditTaskModal
+          visible={controller.editModalVisible}
+          onClose={() => controller.setEditModalVisible(false)}
+          task={controller.currentTask}
+          onEdit={controller.editTask}
+          onDelete={controller.deleteTask}
+        />
+      )}
+      {controller.currentTask && (
+        <TaskDetailModal
+          visible={controller.detailModalVisible}
+          onClose={() => controller.setDetailModalVisible(false)}
+          task={controller.currentTask}
+          onDelete={controller.deleteTask}
+          onEdit={(task) => {
+            controller.setCurrentTask(task);
+            controller.setEditModalVisible(true);
+          }}
+        />
+      )}
     </View>
   );
 };

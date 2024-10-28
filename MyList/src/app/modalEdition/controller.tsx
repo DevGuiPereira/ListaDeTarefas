@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import { EditTaskModalProps, Task } from "./types";
+import { EditTaskModalProps } from "./types";
+import { Task } from "../../server/taskService";
+import { string } from "prop-types";
 
-export const useEditTaskController = (
-  task: Task | null,
-  onEdit: (updatedTask: Task) => void,
-  onDelete: (taskId: string | number) => void,
-  onClose: () => void
-) => {
+export const useEditTaskController = ({
+  task,
+  onEdit,
+  onDelete,
+  onClose,
+}: EditTaskModalProps) => {
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [dateFinish, setDateFinish] = useState<string>("");
@@ -17,16 +19,13 @@ export const useEditTaskController = (
       setDescription(task.description || "");
       setDateFinish(task.dateFinish || "");
     }
+    console.log(task);
   }, [task]);
 
   const handleSave = () => {
     if (task) {
-      onEdit({
-        id: task.id,
-        name,
-        description,
-        dateFinish,
-      });
+      const newTask = { ...task, name, description, dateFinish };
+      onEdit(newTask);
       onClose();
     }
   };

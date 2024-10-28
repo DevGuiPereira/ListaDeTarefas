@@ -21,8 +21,8 @@ const formatDate = (text: string) => {
   return `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4, 8)}`; // mm-dd-yyyy
 };
 
-const parseDate = (dateString: string): Date | null => {
-  const parts = dateString.split("/");
+const parseDate = (datestring: string): Date | null => {
+  const parts = datestring.split("/");
   if (parts.length === 3) {
     const month = parseInt(parts[0], 10) - 1; // Meses são indexados a partir de 0 em JavaScript
     const day = parseInt(parts[1], 10);

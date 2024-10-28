@@ -14,7 +14,6 @@ const InputComponent: React.FC<InputComponentProps> = ({
   placeholder,
   onChangeText,
 }) => {
-
   return (
     <TextInput
       style={style.input}
