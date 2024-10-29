@@ -1,10 +1,7 @@
 import React from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FlatList, Text, View } from "react-native";
 import { style } from "./style";
 import { useControllerSearch } from "./controller";
-import Button from "../../components/button";
-import CreateTaskModal from "../modalCreateTask";
 import EditTaskModal from "../modalEdition";
 import TaskDetailModal from "../modalDetails";
 import InputComponent from "../../components/inputText";
@@ -14,8 +11,9 @@ export default function Search() {
 
   return (
     <View style={style.container}>
-      <View>
+      <View style={style.inputContainer}>
         <InputComponent
+          customStyle={style.inputCustom}
           value={controller.search}
           placeholder={"Search the Task:"}
           onChangeText={(text: string) => controller.onChange(text)}
@@ -26,11 +24,9 @@ export default function Search() {
         renderItem={controller.renderTask}
         keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={style.taskList}
-        ListEmptyComponent={<Text style={style.emptyText}>No tasks.</Text>}
-      />
-      <CreateTaskModal
-        visible={controller.modalVisible}
-        onClose={() => controller.onCloseModal()}
+        ListEmptyComponent={
+          <Text style={style.emptyText}>No tasks filtrete.</Text>
+        }
       />
       {controller.currentTask && (
         <EditTaskModal

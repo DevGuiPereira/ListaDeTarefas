@@ -3,7 +3,7 @@ import { themas } from "../../global/themas";
 
 export const style = StyleSheet.create({
   button: {
-    backgroundColor: themas.colors.primary, // Cor de fundo do botão
+    backgroundColor: themas.colors.darkGray, // Cor de fundo do botão
     paddingVertical: 10, // Espaçamento vertical
     paddingHorizontal: 20, // Espaçamento horizontal
     borderRadius: 5, // Cantos arredondados

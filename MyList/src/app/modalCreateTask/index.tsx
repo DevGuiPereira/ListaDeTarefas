@@ -3,15 +3,12 @@ import {
   View,
   Text,
   Modal,
-  TouchableOpacity,
-  Alert,
   KeyboardAvoidingView,
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
 import { style } from "./style";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CreateTaskModalProps } from "./types";
 import { useControllerCreateTask } from "./controller";
 import InputText from "../../components/inputText";

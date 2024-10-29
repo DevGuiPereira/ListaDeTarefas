@@ -2,12 +2,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { style } from "./style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Button from "../../components/button";
-import CreateTaskModal from "../modalCreateTask";
-import EditTaskModal from "../modalEdition";
-import TaskDetailModal from "../modalDetails";
 import Storage, { Task } from "../../server/taskService";
 import { useFocusEffect } from "@react-navigation/native";
+import { themas } from "../../global/themas";
 
 export function useControllerMain() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -23,11 +20,11 @@ export function useControllerMain() {
     setTasks(tasks);
   };
 
-    useFocusEffect(
-      useCallback(() => {
-        getTasks();
-      }, [])
-    );
+  useFocusEffect(
+    useCallback(() => {
+      getTasks();
+    }, [])
+  );
 
   const onCloseModal = () => {
     setModalVisible(false);
@@ -58,7 +55,8 @@ export function useControllerMain() {
         <TouchableOpacity
           style={[
             style.circleButton,
-            { backgroundColor: item.completed ? "green" : "red" },
+            { backgroundColor: item.completed ? "green" : "white" },
+            { borderColor: item.completed ? "green" : "red" },
           ]}
           onPress={() => toggleTaskCompletion(item.id)}
         />
@@ -67,7 +65,9 @@ export function useControllerMain() {
             style={{
               ...style.taskTitle,
               textDecorationLine: item.completed ? "line-through" : "none",
-              color: item.completed ? "#999" : "#000",
+              color: item.completed
+                ? themas.colors.midGray
+                : themas.colors.black,
             }}
           >
             {item.name}
@@ -83,7 +83,7 @@ export function useControllerMain() {
     );
   };
 
-  const toggleTaskCompletion = async (id: number | string) => {
+  const toggleTaskCompletion = async (id: string) => {
     try {
       const updatedTasks = tasks.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task

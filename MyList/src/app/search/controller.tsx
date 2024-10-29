@@ -8,6 +8,7 @@ import EditTaskModal from "../modalEdition";
 import TaskDetailModal from "../modalDetails";
 import Storage, { Task } from "../../server/taskService";
 import { useFocusEffect } from "@react-navigation/native";
+import { themas } from "../../global/themas";
 
 export function useControllerSearch() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -21,15 +22,14 @@ export function useControllerSearch() {
   const server = new Storage();
 
   const filterTasks = () => {
-    if(!search.length) return
+    if (!search.length) return;
     const filtred = tasks.filter((task) => task.name.includes(search));
     setFiltredTasks(filtred);
   };
 
   useEffect(() => {
     filterTasks();
-    console.log(search);
-  }, [search]);
+  }, [search, tasks]);
 
   const onChange = (text: string) => {
     setSearch(text);
@@ -39,12 +39,19 @@ export function useControllerSearch() {
     const tasks = await server.getTasks();
     setTasks(tasks);
     setFiltredTasks([]);
-    setSearch("")
   };
-  
+
+  const getTasksFocus = async () => {
+    const tasks = await server.getTasks();
+    setTasks(tasks);
+    setFiltredTasks([]);
+    setSearch("");
+  };
+
   useFocusEffect(
     useCallback(() => {
-      getTasks()
+      getTasksFocus();
+      getTasks();
     }, [])
   );
 
@@ -77,7 +84,8 @@ export function useControllerSearch() {
         <TouchableOpacity
           style={[
             style.circleButton,
-            { backgroundColor: item.completed ? "green" : "red" },
+            { backgroundColor: item.completed ? "green" : "white" },
+            { borderColor: item.completed ? "green" : "red" },
           ]}
           onPress={() => toggleTaskCompletion(item.id)}
         />
@@ -86,7 +94,9 @@ export function useControllerSearch() {
             style={{
               ...style.taskTitle,
               textDecorationLine: item.completed ? "line-through" : "none",
-              color: item.completed ? "#999" : "#000",
+              color: item.completed
+                ? themas.colors.midGray
+                : themas.colors.black,
             }}
           >
             {item.name}
@@ -102,7 +112,7 @@ export function useControllerSearch() {
     );
   };
 
-  const toggleTaskCompletion = async (id: number | string) => {
+  const toggleTaskCompletion = async (id: string) => {
     try {
       const updatedTasks = tasks.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task
@@ -113,6 +123,7 @@ export function useControllerSearch() {
           AsyncStorage.setItem(`@task_${task.id}`, JSON.stringify(task))
         )
       );
+      getTasks();
     } catch (error) {
       console.error("Error updating task completion:", error);
     }

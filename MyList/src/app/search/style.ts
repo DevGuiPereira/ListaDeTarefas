@@ -1,23 +1,25 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+import { themas } from "../../global/themas";
 
 export const style = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: themas.colors.grayBackground,
   },
   taskContainer: {
     flexDirection: "row",
     alignItems: "center",
     padding: 15,
     marginBottom: 15,
-    backgroundColor: "#fff",
+    backgroundColor: themas.colors.white,
     borderRadius: 10,
   },
   circleButton: {
     width: 30,
     height: 30,
     borderRadius: 15,
+    borderWidth: 2,
     marginRight: 15,
     backgroundColor: "transparent",
   },
@@ -31,12 +33,12 @@ export const style = StyleSheet.create({
   },
   taskDate: {
     fontSize: 14,
-    color: "#666",
+    color: themas.colors.lightGray,
     marginBottom: 5,
   },
   taskDescription: {
     fontSize: 14,
-    color: "#333",
+    color: themas.colors.lightGray,
   },
   absoluteButtonContainer: {
     position: "absolute",
@@ -51,7 +53,13 @@ export const style = StyleSheet.create({
   emptyText: {
     textAlign: "center",
     fontSize: 16,
-    color: "#666",
+    color: themas.colors.lightGray,
     marginTop: 20,
+  },
+  inputContainer: {
+    alignItems: "center",
+  },
+  inputCustom: {
+    width: Dimensions.get("window").width / 1.1,
   },
 });

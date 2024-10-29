@@ -7,7 +7,7 @@ export const style = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: themas.colors.primary,
+    borderColor: themas.colors.darkGray,
     borderRadius: 5,
     padding: 10,
     backgroundColor: themas.colors.white,

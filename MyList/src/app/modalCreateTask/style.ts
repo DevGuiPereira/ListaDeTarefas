@@ -4,13 +4,13 @@ import { themas } from "../../global/themas";
 export const style = StyleSheet.create({
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Fundo semi-transparente para o efeito de overlay
+    backgroundColor: themas.colors.backgroundModal, // Fundo semi-transparente para o efeito de overlay
     justifyContent: "center",
     alignItems: "center",
   },
   modalContent: {
     width: "80%",
-    backgroundColor: "#FFF",
+    backgroundColor: themas.colors.white,
     padding: 20,
     borderRadius: 10,
     alignItems: "center",
@@ -21,14 +21,14 @@ export const style = StyleSheet.create({
     marginBottom: 10,
   },
   closeButton: {
-    backgroundColor: themas.colors.primary,
+    backgroundColor: themas.colors.darkGray,
     padding: 10,
     borderRadius: 5,
     alignItems: "center",
     width: "40%",
   },
   buttonText: {
-    color: "#FFFFFF",
+    color: themas.colors.white,
     fontSize: 16,
     fontWeight: "bold",
   },
