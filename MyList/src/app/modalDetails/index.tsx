@@ -1,9 +1,11 @@
 // TaskDetailModal.tsx
 import React from "react";
 import { View, Text, Modal } from "react-native";
-import Button from "../../components/button"; // Import the Button component
 import { style } from "./style"; // Import your styles here
 import { TaskDetailModalProps } from "./types";
+import ButtonEdit from "../../components/buttonEdit";
+import ButtonDelete from "../../components/buttonDelete";
+import ButtonClose from "../../components/buttonClose";
 
 const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
   visible,
@@ -21,6 +23,9 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
     >
       <View style={style.modalBackground}>
         <View style={style.modalContainer}>
+          <View style={style.buttonContainerClose}>
+            <ButtonClose title="X" onPress={onClose} />
+          </View>
           <Text style={style.taskTitle}>{task?.name}</Text>
           {task?.description && (
             <Text style={style.taskDescription}>{task.description}</Text>
@@ -37,9 +42,8 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
 
           {/* Container for buttons */}
           <View style={style.buttonContainer}>
-            <Button title="Close" onPress={onClose} />
-            <Button
-              title="Edit Task" // Edit Task button
+            <ButtonEdit
+              title="Edit" // Edit Task button
               onPress={() => {
                 if (task) {
                   onEdit(task); // Pass the task to edit
@@ -47,8 +51,8 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
                 }
               }}
             />
-            <Button
-              title="Delete Task"
+            <ButtonDelete
+              title="Delete"
               onPress={() => {
                 if (task) {
                   onDelete(task.id); // Pass the task id to delete

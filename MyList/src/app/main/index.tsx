@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import React from "react";
+import { View, Text, FlatList } from "react-native";
 import { style } from "./style";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import Button from "../../components/button";
+import ButtonNew from "../../components/buttonNew";
 import CreateTaskModal from "../modalCreateTask";
 import EditTaskModal from "../modalEdition";
 import TaskDetailModal from "../modalDetails";
@@ -21,10 +20,7 @@ const Main = () => {
         ListEmptyComponent={<Text style={style.emptyText}>No tasks.</Text>}
       />
       <View style={style.absoluteButtonContainer}>
-        <Button
-          title="Create Task"
-          onPress={() => controller.setModalVisible(true)}
-        />
+        <ButtonNew onPress={() => controller.setModalVisible(true)} />
       </View>
       <CreateTaskModal
         visible={controller.modalVisible}

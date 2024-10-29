@@ -18,14 +18,7 @@ export const style = StyleSheet.create({
   modalTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 10,
-  },
-  closeButton: {
-    backgroundColor: themas.colors.darkGray,
-    padding: 10,
-    borderRadius: 5,
-    alignItems: "center",
-    width: "40%",
+    marginBottom: 20,
   },
   buttonText: {
     color: themas.colors.white,
@@ -34,5 +27,14 @@ export const style = StyleSheet.create({
   },
   inputDescription: {
     marginBottom: 10,
+  },
+  buttonContainerClose: {
+    flexDirection: "column", // Stack buttons vertically
+    width: "18%", // Make it full width of modal
+    marginLeft: "105%",
+  },
+  buttonContainerSave: {
+    flexDirection: "column", // Stack buttons vertically
+    width: "100%", // Make it full width of modal
   },
 });

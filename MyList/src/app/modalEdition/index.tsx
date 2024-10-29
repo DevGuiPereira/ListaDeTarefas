@@ -1,20 +1,18 @@
 // EditTaskModal.tsx
-import React, { useEffect, useState } from "react";
 import {
   Modal,
   View,
   Text,
-  TouchableOpacity,
-  KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
 import InputComponent from "../../components/inputText"; // Adjust the import path as necessary
 import DateInputComponent from "../../components/inputDate"; // Adjust the import path as necessary
-import Button from "../../components/button"; // Your button component
+import Button from "../../components/buttonClose"; // Your button component
 import style from "./style"; // Adjust the import path as necessary
 import { EditTaskModalProps } from "./types";
 import { useEditTaskController } from "./controller";
+import ButtonSave from "../../components/buttonSave";
 
 const EditTaskModal: React.FC<EditTaskModalProps> = ({
   visible,
@@ -41,6 +39,9 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={style.modalBackground}>
           <View style={style.modalContainer}>
+            <View style={style.buttonContainerClose}>
+              <Button title="X" onPress={onClose} />
+            </View>
             <Text style={style.modalTitle}>Edit Task</Text>
 
             <InputComponent
@@ -60,17 +61,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
             />
 
             <View style={style.buttonContainer}>
-              <Button title="Save" onPress={controller.handleSave} />
-              <Button
-                title="Delete Task"
-                onPress={() => {
-                  if (task) {
-                    onDelete(task.id);
-                    onClose();
-                  }
-                }}
-              />
-              <Button title="Cancel" onPress={onClose} />
+              <ButtonSave title="Save" onPress={controller.handleSave} />
             </View>
           </View>
         </View>

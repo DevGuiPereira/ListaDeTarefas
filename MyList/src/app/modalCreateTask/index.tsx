@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   View,
   Text,
@@ -13,13 +12,13 @@ import { CreateTaskModalProps } from "./types";
 import { useControllerCreateTask } from "./controller";
 import InputText from "../../components/inputText";
 import DateInputComponent from "../../components/inputDate";
-import Button from "../../components/button";
+import ButtonClose from "../../components/buttonClose";
+import ButtonSave from "../../components/buttonSave";
 
 const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
   visible,
   onClose,
 }) => {
-
   const controller = useControllerCreateTask(onClose);
 
   return (
@@ -35,6 +34,10 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={style.modalContent}
           >
+            <View style={style.buttonContainerClose}>
+              <ButtonClose title="X" onPress={onClose} />
+            </View>
+
             <Text style={style.modalTitle}>Create a New Task</Text>
 
             <InputText
@@ -54,9 +57,9 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
               placeholder="Date: MM/DD/YYYY"
               onChangeText={(text) => controller.setTaskDateFinish(text)}
             />
-
-            <Button title="Save Task" onPress={controller.saveTask} />
-            <Button title="Close" onPress={onClose} />
+            <View style={style.buttonContainerSave}>
+              <ButtonSave title="Save Task" onPress={controller.saveTask} />
+            </View>
           </KeyboardAvoidingView>
         </View>
       </TouchableWithoutFeedback>

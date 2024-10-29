@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { EditTaskModalProps } from "./types";
-import { Task } from "../../server/taskService";
-import { string } from "prop-types";
 
 export const useEditTaskController = ({
   task,

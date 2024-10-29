@@ -1,9 +1,10 @@
-import { NavigationContainer, DarkTheme } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Main from "../app/main";
 import Search from "../app/search";
 import { StatusBar } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { themas } from "../global/themas";
 
 const Tab = createBottomTabNavigator();
 
@@ -24,13 +25,23 @@ export default function Routes() {
             tabBarIcon: ({ color, size }) => (
               <Ionicons name={iconName} size={size} color={color} />
             ),
-            tabBarActiveTintColor: "#dd1b1b",
-            tabBarInactiveTintColor: "#8e8e93",
-            headerTintColor: "#dd1b1b",
+            tabBarActiveTintColor: themas.colors.red,
+            tabBarInactiveTintColor: themas.colors.lightGray,
+            headerTintColor: themas.colors.red,
             headerTitleStyle: {
               fontWeight: "bold",
               fontSize: 20,
             },
+            headerLeft: () => (
+              <Ionicons
+                name="checkmark-circle-outline"
+                color={themas.colors.red}
+                style={{
+                  marginLeft: 135,
+                  fontSize: 25,
+                }}
+              />
+            ),
           };
         }}
       >

@@ -55,6 +55,11 @@ const style = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20, // Add some space below the title
   },
+  buttonContainerClose: {
+    flexDirection: "column", // Stack buttons vertically
+    width: "18%", // Make it full width of modal
+    marginLeft: "105%",
+  },
 });
 
 export default style;

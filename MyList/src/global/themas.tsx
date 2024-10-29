@@ -8,5 +8,7 @@ export const themas = {
     red: "#dd1b1b",
     grayBackground: "#f0f0f0",
     backgroundModal: "rgba(0, 0, 0, 0.5)",
+    yellow: "#ffd700",
+    green: "#0bae0b",
   },
 };

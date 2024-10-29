@@ -41,8 +41,14 @@ export const style = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "column", // Stack buttons vertically
-    width: "100%", // Make it full width of modal
-    marginTop: 20, // Add some margin to separate from the task details
+    justifyContent: "center",
+    width: "100%", // Make it full width of modal,
+    marginTop: "10%",
+  },
+  buttonContainerClose: {
+    flexDirection: "column", // Stack buttons vertically
+    width: "18%", // Make it full width of modal
+    marginLeft: "105%",
   },
   buttonText: {
     color: themas.colors.white,

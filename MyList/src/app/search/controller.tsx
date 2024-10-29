@@ -1,11 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { style } from "./style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Button from "../../components/button";
-import CreateTaskModal from "../modalCreateTask";
-import EditTaskModal from "../modalEdition";
-import TaskDetailModal from "../modalDetails";
 import Storage, { Task } from "../../server/taskService";
 import { useFocusEffect } from "@react-navigation/native";
 import { themas } from "../../global/themas";
@@ -84,8 +80,16 @@ export function useControllerSearch() {
         <TouchableOpacity
           style={[
             style.circleButton,
-            { backgroundColor: item.completed ? "green" : "white" },
-            { borderColor: item.completed ? "green" : "red" },
+            {
+              backgroundColor: item.completed
+                ? themas.colors.green
+                : themas.colors.white,
+            },
+            {
+              borderColor: item.completed
+                ? themas.colors.green
+                : themas.colors.red,
+            },
           ]}
           onPress={() => toggleTaskCompletion(item.id)}
         />
