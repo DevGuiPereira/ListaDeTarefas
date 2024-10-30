@@ -131,23 +131,8 @@ export function useControllerSearch() {
 
   // Função assíncrona para alternar o estado de conclusão da tarefa
   const toggleTaskCompletion = async (id: string) => {
-    try {
-      // Atualiza o estado da tarefa correspondente
-      const updatedTasks = tasks.map(
-        (task) =>
-          task.id === id ? { ...task, completed: !task.completed } : task // Alterna a conclusão
-      );
-      setTasks(updatedTasks); // Atualiza o estado de tarefas com as tarefas modificadas
-      await Promise.all(
-        updatedTasks.map(
-          (task) =>
-            AsyncStorage.setItem(`@task_${task.id}`, JSON.stringify(task)) // Armazena a tarefa atualizada localmente
-        )
-      );
-      getTasks(); // Obtém tarefas novamente
-    } catch (error) {
-      console.error("Error updating task completion:", error); // Loga erro em caso de falha
-    }
+    await server.toggleTaskCompletion(id); // Chama a função do servidor para alternar a conclusão
+    getTasks(); // Atualiza a lista de tarefas
   };
 
   // Retorna um objeto com estados e funções para serem usados pelo componente pai

@@ -13,9 +13,9 @@ export interface Task {
 
 // Interface para representar uma nova tarefa a ser criada
 export interface CreatedTask {
-  name: string; 
-  description?: string; 
-  dateFinish?: string; 
+  name: string;
+  description?: string;
+  dateFinish?: string;
 }
 
 // Classe Storage que encapsula as operações de armazenamento de tarefas
@@ -83,7 +83,6 @@ class Storage {
       return task; // Retorna a nova tarefa criada
     } catch (error) {
       Alert.alert("Error", "Ocorreu um erro ao criar a tarefa."); // Alerta em caso de erro
-      console.error("Error:", error); // Loga o erro
       return null; // Retorna null em caso de falha
     }
   }
@@ -129,6 +128,7 @@ class Storage {
       );
     } catch (error) {
       console.error("Error updating task completion:", error); // Loga o erro
+      Alert.alert("Error", "Error updating task completion");
     }
   }
 
@@ -138,6 +138,7 @@ class Storage {
       await AsyncStorage.removeItem(`@task_${id}`); // Remove a tarefa do AsyncStorage
     } catch (error) {
       console.error("Error deleting task:", error); // Loga o erro
+      Alert.alert("Error", "Error Deleting task");
     }
   }
 
@@ -158,6 +159,7 @@ class Storage {
       );
     } catch (error) {
       console.error("Error editing task:", error); // Loga o erro
+      Alert.alert("Error", "Error Editing task");
     }
   }
 

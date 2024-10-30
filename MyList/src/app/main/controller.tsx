@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { TouchableOpacity, View, Text } from "react-native";
 import { style } from "./style";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import Storage, { Task } from "../../server/taskService";
 import { useFocusEffect } from "@react-navigation/native";
 import { themas } from "../../global/themes";
@@ -100,23 +99,9 @@ export function useControllerMain() {
     </TouchableOpacity>
   );
 
-  // Função para alternar o estado de conclusão da tarefa
   const toggleTaskCompletion = async (id: string) => {
-    try {
-      const updatedTasks = tasks.map(
-        (task) =>
-          task.id === id ? { ...task, completed: !task.completed } : task // Atualiza a tarefa específica
-      );
-      setTasks(updatedTasks); // Atualiza o estado das tarefas
-      await Promise.all(
-        updatedTasks.map(
-          (task) =>
-            AsyncStorage.setItem(`@task_${task.id}`, JSON.stringify(task)) // Salva a tarefa atualizada no AsyncStorage
-        )
-      );
-    } catch (error) {
-      console.error("Error updating task completion:", error); // Tratamento de erro
-    }
+    await server.toggleTaskCompletion(id); // Chama a função do servidor para alternar a conclusão
+    getTasks(); // Atualiza a lista de tarefas
   };
 
   // Retorna as funções e estados para serem usados no componente principal

@@ -34,7 +34,7 @@ export function useControllerCreateTask(onClose: () => void) {
       onClose();
     } catch (error) {
       // Mostra um alerta em caso de erro e exibe o erro no console para depuração
-      Alert.alert("Erro", "Houve um problema ao salvar a tarefa.");
+      Alert.alert("Erro", "Error when saving.");
       console.error("Erro ao salvar a tarefa:", error); // Log do erro
     }
   };
