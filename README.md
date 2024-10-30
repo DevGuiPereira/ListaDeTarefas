@@ -32,7 +32,7 @@ Este é um aplicativo de checklist desenvolvido em React Native. O objetivo prin
 
    ```bash
    git clone https://github.com/DevGuiPereira/ListaDeTarefas
-   cd ListaDeTarefas
+   cd ListaDeTarefas/MyList
 
    - Instale o Expo CLI (se ainda não o tiver): 
    
