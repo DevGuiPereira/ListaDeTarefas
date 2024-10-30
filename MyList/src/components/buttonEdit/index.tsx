@@ -1,14 +1,9 @@
 import React from "react";
-import { TouchableOpacity, Text, } from "react-native";
+import { TouchableOpacity, Text } from "react-native";
 import { style } from "./style";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { themas } from "../../global/themas";
-
-interface ButtonEditProps {
-  title: string;
-  onPress: () => void;
-  style?: object;
-}
+import { themas } from "../../global/themes";
+import { ButtonEditProps } from "./types";
 
 const ButtonEdit: React.FC<ButtonEditProps> = ({
   title,

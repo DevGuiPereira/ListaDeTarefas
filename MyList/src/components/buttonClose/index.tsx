@@ -1,13 +1,8 @@
 import React from "react";
-import { TouchableOpacity, } from "react-native";
+import { TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { themas } from "../../global/themas";
-
-interface ButtonCloseProps {
-  title: string;
-  onPress: () => void;
-  style?: object;
-}
+import { themas } from "../../global/themes";
+import { ButtonCloseProps } from "./types";
 
 const ButtonClose: React.FC<ButtonCloseProps> = ({ onPress }) => {
   return (

@@ -8,10 +8,14 @@ import InputComponent from "../../components/inputText";
 
 export default function Search() {
   const controller = useControllerSearch();
+  // Usa o hook para obter o estado e as funções necessárias para o gerenciamento de tarefas
 
   return (
     <View style={style.container}>
+      {/* Container principal do componente */}
+
       <View style={style.inputContainer}>
+        {/* Container para o campo de entrada de pesquisa */}
         <InputComponent
           customStyle={style.inputCustom}
           value={controller.search}
@@ -19,6 +23,7 @@ export default function Search() {
           onChangeText={(text: string) => controller.onChange(text)}
         />
       </View>
+
       <FlatList
         data={controller.filtredTasks}
         renderItem={controller.renderTask}
@@ -28,16 +33,21 @@ export default function Search() {
           <Text style={style.emptyText}>No tasks filtrete.</Text>
         }
       />
+
       {controller.currentTask && (
+        // Se houver uma tarefa selecionada
         <EditTaskModal
           visible={controller.editModalVisible}
+
           onClose={() => controller.setEditModalVisible(false)}
           task={controller.currentTask}
           onEdit={controller.editTask}
           onDelete={controller.deleteTask}
         />
       )}
+
       {controller.currentTask && (
+        // Se houver uma tarefa selecionada
         <TaskDetailModal
           visible={controller.detailModalVisible}
           onClose={() => controller.setDetailModalVisible(false)}

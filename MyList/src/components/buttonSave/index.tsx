@@ -1,14 +1,9 @@
 import React from "react";
-import { TouchableOpacity, Text, } from "react-native";
+import { TouchableOpacity, Text } from "react-native";
 import { style } from "./style";
-import { themas } from "../../global/themas";
+import { themas } from "../../global/themes";
 import Ionicons from "react-native-vector-icons/Ionicons";
-
-interface ButtonSaveProps {
-  title: string;
-  onPress: () => void;
-  style?: object;
-}
+import { ButtonSaveProps } from "./types";
 
 const ButtonSave: React.FC<ButtonSaveProps> = ({
   title,

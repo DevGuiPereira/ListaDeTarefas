@@ -1,14 +1,14 @@
-import AsyncStorage from "@react-native-async-storage/async-storage"; // Importa AsyncStorage para armazenamento local
-import { Alert } from "react-native"; // Importa Alert para exibir mensagens ao usuário
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from "react-native";
 
 // Interface que define a estrutura de uma tarefa
 export interface Task {
   id: string;
   name: string;
-  description?: string;
-  dateCreated: Date; 
-  dateFinish?: string; 
-  completed: boolean; 
+  description?: string; //não obrigatório
+  dateCreated: Date;
+  dateFinish?: string; //não obrigatório
+  completed: boolean;
 }
 
 // Interface para representar uma nova tarefa a ser criada
@@ -25,7 +25,7 @@ class Storage {
     const keys = await AsyncStorage.getAllKeys(); // Obtém todas as chaves armazenadas
     const taskKeys = keys.filter((key) => key.startsWith("@task_")); // Filtra as chaves que começam com "@task_"
 
-    // Carrega e parseia as tarefas a partir das chaves filtradas
+    // Carrega as tarefas
     const loadedTasks = await Promise.all(
       taskKeys.map(async (key) => {
         const taskstring = await AsyncStorage.getItem(key); // Obtém a string da tarefa
@@ -143,7 +143,6 @@ class Storage {
 
   // Método assíncrono para editar uma tarefa específica
   public async editTask(updatedTask: Task) {
-    console.log("!!!", updatedTask); // Loga a tarefa atualizada
     try {
       const tasks = await this.getTasks(); // Obtém todas as tarefas
       const updatedTasks = tasks.map(
@@ -162,7 +161,7 @@ class Storage {
     }
   }
 
-  // Método getter para obter todas as tarefas
+  // Método get para obter todas as tarefas
   public async getTasks() {
     const tasks = await this.loadTasks(); // Carrega as tarefas
     return tasks; // Retorna as tarefas carregadas

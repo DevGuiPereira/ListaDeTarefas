@@ -1,12 +1,9 @@
 import React from "react";
-import { TouchableOpacity,} from "react-native";
+import { TouchableOpacity } from "react-native";
 import { style } from "./style";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { themas } from "../../global/themas";
-
-interface ButtonNewProps {
-  onPress: () => void;
-}
+import { themas } from "../../global/themes";
+import { ButtonNewProps } from "./types";
 
 const ButtonNew: React.FC<ButtonNewProps> = ({ onPress }) => {
   return (

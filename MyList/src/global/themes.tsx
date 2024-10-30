@@ -1,3 +1,4 @@
+//cores globais usadas no projeto
 export const themas = {
   colors: {
     white: "#FFFF",

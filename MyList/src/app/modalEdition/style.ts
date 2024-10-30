@@ -1,6 +1,6 @@
 // style.ts
 import { StyleSheet } from "react-native";
-import { themas } from "../../global/themas";
+import { themas } from "../../global/themes";
 
 const style = StyleSheet.create({
   modalBackground: {

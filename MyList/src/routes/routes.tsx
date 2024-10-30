@@ -4,7 +4,7 @@ import Main from "../app/main";
 import Search from "../app/search";
 import { StatusBar } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { themas } from "../global/themas";
+import { themas } from "../global/themes";
 
 const Tab = createBottomTabNavigator();
 
@@ -17,7 +17,7 @@ export default function Routes() {
           const iconName =
             route.name === "MyList"
               ? "list-outline"
-              : route.name === "Search"
+              : route.name === "Search" // condições para definir o icon de cada pagina
               ? "search-outline"
               : "bug-outline";
 
@@ -27,7 +27,7 @@ export default function Routes() {
             ),
             tabBarActiveTintColor: themas.colors.red,
             tabBarInactiveTintColor: themas.colors.lightGray,
-            headerTintColor: themas.colors.red,
+            headerTintColor: themas.colors.red, // style para o title da pagina e a navegação das paginas
             headerTitleStyle: {
               fontWeight: "bold",
               fontSize: 20,

@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from "react";
 import { TouchableOpacity, View, Text } from "react-native";
-import { style } from "./style"; // Importando estilos específicos
-import AsyncStorage from "@react-native-async-storage/async-storage"; // Para armazenamento local
-import Storage, { Task } from "../../server/taskService"; // Importando serviço para gerenciamento de tarefas
-import { useFocusEffect } from "@react-navigation/native"; // Hook para lidar com eventos de foco da navegação
-import { themas } from "../../global/themas"; // Temas globais de estilos
+import { style } from "./style";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Storage, { Task } from "../../server/taskService";
+import { useFocusEffect } from "@react-navigation/native";
+import { themas } from "../../global/themes";
 
 // Hook customizado que controla o estado e a lógica da tela principal
 export function useControllerMain() {
@@ -27,7 +27,7 @@ export function useControllerMain() {
   useFocusEffect(
     useCallback(() => {
       getTasks(); // Chamando a função para obter tarefas
-    }, []) // O array vazio significa que esta função será chamada apenas na montagem do componente
+    }, [])
   );
 
   // Função para fechar o modal e atualizar as tarefas
@@ -57,7 +57,7 @@ export function useControllerMain() {
   // Função para renderizar cada tarefa na lista
   const renderTask = ({ item }: { item: Task }) => (
     <TouchableOpacity
-      style={style.taskContainer} // Estilo do contêiner da tarefa
+      style={style.taskContainer}
       onPress={() => openDetailModal(item)} // Ação ao pressionar a tarefa
     >
       <TouchableOpacity

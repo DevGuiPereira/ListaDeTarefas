@@ -1,13 +1,7 @@
 import React from "react";
-import { TextInput, TextStyle, StyleProp } from "react-native";
+import { TextInput } from "react-native";
 import { style } from "./style";
-
-interface InputComponentProps {
-  value: string;
-  placeholder: string;
-  customStyle?: StyleProp<TextStyle>;
-  onChangeText: (text: string) => void;
-}
+import { InputComponentProps } from "./types";
 
 const InputComponent: React.FC<InputComponentProps> = ({
   value,
