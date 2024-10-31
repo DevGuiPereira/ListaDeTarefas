@@ -85,3 +85,7 @@ As funcionalidades principais foram desenvolvidas usando `React Hooks` para gere
 ## Demonstração
 
 Assista à demonstração da implementação no [Loom Video](https://www.loom.com/share/26374ddd821d4c12a29f65c2833aadaf?sid=f84c0569-d354-471f-861c-8f702d67727f), onde é abordada a parte mais relevante do código.
+
+[Vídeo do Aplicativo no Expo Go](https://github.com/user-attachments/assets/5b29ca9a-083c-4925-9bef-c25569b64820).
+
+
